@@ -21,8 +21,9 @@ function handleLoginBtnClick(event){
 }
 
 function pantinGreetings(username){
-    greeting.innerText = `Hello! ${username}. What's UP!`;
+    greeting.innerText = `${username}, `;
     greeting.classList.remove(CLASSNAME_HIDDEN);
+    
 }
 
 loginForm.addEventListener("submit", handleLoginBtnClick);

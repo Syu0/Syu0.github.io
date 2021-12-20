@@ -7,19 +7,53 @@
     <title>Document</title>
 </head>
 <body>
-    <form id="LoginForm" class="hidden" >
-        <input id="loginUsername" type="text" maxlength="15" required=true placeholder="What is your name?"/>
-        <button id ="loginButton" type="submit">Login</button>
-    </form>
-    <h2 id="clock">00:00</h1>
-    <h1 id="greeting" class="hidden"></h1>
     <div id="quotes">
         <span></span>
         <span></span>
     </div>
+    
+    <form id="LoginForm" class="hidden" >
+        <input id="loginUsername" type="text" maxlength="15" required=true placeholder="What is your name?"/>
+        <button id ="loginButton" type="submit">Login</button>
+    </form>
+    
+    <h2 id="clock">00:00</h2>
+
+    <div class="container">
+        <div class="item">
+            <h2 id="greeting" class="hidden"></h2>
+            <div id="geolocationInfo">
+                <span></span><span></span>
+            </div>
+        </div>
+        <div class="item" id="challange">
+            
+            <form id=ChallangeForm>
+                <input type="text" class="title" required=true placeholder="Try something new for 30days."/>
+            </form>
+            <div id="checkBoard" class="container"></div>
+            <button id="reset">reset</button>
+        </div>
+        <div class="item">
+            <form id=TodosForm>
+                <input type="text" class="title" required=true placeholder="Write a TO-DO and press Enter"/>
+            </form>
+    
+            <ul id=todos></ul>
+        </div>
+    </div>
+  
+        
+    <img id="randomBgs"> 
+    
+
+    
     <script src="greetings.js"></script>
     <script src="clock.js"></script>
     <script src="quotes.js"></script>
     <script src="backgrounds.js"></script>
+    <script src="todos.js"></script>
+    <script src="weather.js"></script>
+    <script src="30dayChallange.js"></script>
 </body>
 </html>
