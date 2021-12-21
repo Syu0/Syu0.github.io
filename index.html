@@ -13,15 +13,18 @@
     </div>
     
     <form id="LoginForm" class="hidden" >
-        <input id="loginUsername" type="text" maxlength="15" required=true placeholder="What is your name?"/>
-        <button id ="loginButton" type="submit">Login</button>
+        <span>you can call me (</span>
+        <input id="loginUsername" type="text" class="title" maxlength="15" required=true 
+        placeholder="your name"/>
+        <span>)</span>
+        <button id ="loginButton" type="submit">confirm</button>
     </form>
     
     <h2 id="clock">00:00</h2>
 
     <div class="container">
         <div class="item">
-            <h2 id="greeting" class="hidden"></h2>
+            <span id="greeting" class="hidden"></span>
             <div id="geolocationInfo">
                 <span></span><span></span>
             </div>
@@ -30,8 +33,11 @@
             
             <form id=ChallangeForm>
                 <input type="text" class="title" required=true placeholder="Try something new for 30days."/>
+                <div><h2></h2> </div>
+                <div><span></span></div>
             </form>
             <div id="checkBoard" class="container"></div>
+            <span  id="guideMessage" class="hidden">You did!! complated!</span>
             <button id="reset">reset</button>
         </div>
         <div class="item">
