@@ -33,17 +33,16 @@ function getDataWeatherAPIcall(url){
     
     console.log(url);
     fetch(url,{
-        method: 'GET',        
-        mode: 'no-cors',
+        method: 'GET',  
         headers:{
-            'Access-Control-Allow-Origin':'*',        
+            'Access-Control-Allow-Origin':'*',
             "Accept": "application/json",
         }
     }).then(res=>{res.json})
     .then(data => {
         console.log(data);
         return data;
-    });
+    }).catch(e=>console.log(e));
 }
 
 navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);

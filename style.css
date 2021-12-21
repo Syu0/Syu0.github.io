@@ -31,6 +31,16 @@ body {
     margin-bottom: 0;
     font-size: 80px;
 }
+#LoginForm input {
+    width: 200px;
+    height: 40px;
+    border: 0px;
+    color: beige;
+    border-bottom: 1px solid #fff;
+    background: none;
+    background-color: rgba(255,255,255,0.1);
+    text-align: center;
+}
 
 #TodosForm input {
     width: 400px;
@@ -81,12 +91,26 @@ body {
     /* background-color: rgba(255,255,255,0.3); */
     padding-right:20px;
 }
-
+.complatedEffect {
+    animation-duration: 4s; animation-name: rainbowLink; animation-iteration-count: infinite; } 
+    @keyframes rainbowLink {     
+    0% { color: #ff2a2a; }
+    15% { color: #ff7a2a; }
+    30% { color: #ffc52a; }
+    45% { color: #43ff2a; }
+    60% { color: #2a89ff; }
+    75% { color: #202082; }
+    90% { color: #6b2aff; } 
+    100% { color: #e82aff; }
+}
 #ChallangeForm input::placeholder {
     color: beige;
     font-style: italic;
 }
-
+#ChallangeForm div:last-child{
+    text-align: left;
+    padding-left: 25px;
+}
 #ChallangeForm input {
     width: 400px;
     height: 40px;
@@ -98,7 +122,29 @@ body {
     text-align: center;
     margin-bottom: 20px;
 }
-
+#checkBoard .item.progress {
+    margin: 0 15px 5 0;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    border-radius: 100%;
+    font-style: italic;
+    color: beige;
+    background: gray;
+}
+#checkBoard {
+    text-align: left;
+}
+#checkBoard .item.complated {
+    margin: 0 15px 0 0;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    border-radius: 100%;
+    font-style: italic;
+    color: beige;
+    background: #f0d264;
+}
 button {
     margin: 5px;
     border: none;
