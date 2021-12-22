@@ -13,10 +13,10 @@ function onGeoSuccess(position) {
     const air_pollutionUrl= `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${serviceKey}`;
     const curWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${serviceKey}`;
     
-    const pm_2_5 = getDataWeatherAPIcall(air_pollutionUrl)
+    const pm_2_5 = getDataWeatherAPIcall(curWeatherUrl)
     airSpan.innerText= pm_2_5.list[0].components.pm2_5;
     // 75 > 매우 나쁨   / 좋음
-    const weatherInfo = getDataWeatherAPIcall(curWeatherUrl)
+    const weatherInfo = getDataWeatherAPIcall(air_pollutionUrl)
     citySpan.innerText = weatherInfo.name;
     tempSpan.innerText = weatherInfo.weather[0].main.temp;
 
@@ -32,16 +32,8 @@ function onGeoError(){
 function getDataWeatherAPIcall(url){
     
     console.log(url);
-    fetch(url,{
-        method: 'GET',  
-        headers:{
-            'Access-Control-Allow-Origin':'*',
-            "Accept": "application/json",
-        }
-    }).then(res=>{res.json})
-    .then(data => {
-        console.log(data);
-        return data;
+    fetch(url).then(res=>res.json())
+    .then(data => {console.log(data.name);
     }).catch(e=>console.log(e));
 }
 
