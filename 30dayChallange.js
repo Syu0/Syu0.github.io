@@ -37,35 +37,35 @@ function completedToday(event){
     // if already complated
     const eventId = parseInt(event.target.id);
     const objIndex = myRecodes.findIndex((obj => obj.id == eventId));
-    if (myRecodes[objIndex].status === STATUS_COMPLATE) {
+    console.log(myRecodes, event.target.id);
+    if (objIndex !== undefined && objIndex >= 0 && myRecodes[objIndex].status === STATUS_COMPLATE) {
         console.log(myRecodes[objIndex].status);
         return;
     }
     
+    event.target.classList.add(STATUS_COMPLATE);
+    event.target.innerText = "v"
     const complateBtnInfo = {
-        "id" : eventId,
-        "status":STATUS_COMPLATE,
+        "className" : "item complated",
+        "id" : event.target.id,
+        "status": STATUS_COMPLATE,
         "text" : "v"
-    } 
-    paintTodayBtn(event.target, complateBtnInfo);
-
+    }
+    console.log(complateBtnInfo);
     // update array
-    myRecodes[objIndex] = complateBtnInfo;
+    myRecodes.push(complateBtnInfo)
 
     if (myRecodes.length < 30){
         const nextBtnInfo = {
+            "className" : "item progress",
             "id" : eventId+1,
             "status": STATUS_PROGRESS,
             "text" : eventId+1
         }
-        const newBtn = document.createElement("button");
-        newBtn.id=eventId+1;
-        newBtn.className="item progress";
-        newBtn.addEventListener("click",completedToday);
-        checkBoard.appendChild(newBtn);
-        paintTodayBtn(newBtn, nextBtnInfo);
+
+        paintTodayBtn( nextBtnInfo);
     
-        myRecodes.push(nextBtnInfo);
+        //myRecodes.push(nextBtnInfo);
     } else {
         complateEffect();
         alert("finally clear!")
@@ -74,79 +74,73 @@ function completedToday(event){
     localStorage.setItem(CHALLANGE_KEY,JSON.stringify(myRecodes));
 
 }
-function paintTodayBtn(btn, info){
-    btn.innerText = info.text;
-    btn.classList.add(info.status);
+
+function paintTodayBtn(info){
+
+    const newBtn = document.createElement("button");
+    newBtn.id=info.id;
+    newBtn.className= info.className;
+    newBtn.innerText = info.text;
+
+    newBtn.addEventListener("click",completedToday);
+    checkBoard.appendChild(newBtn);
+
 }
+
+function paintCheckBoard(){
+
+   myRecodes.map(function(item) {
+        
+       const btnInfo = {
+           "className" : item.className,
+           "id" : item.id,
+           "status": item.status,
+           "text" : item.text
+       } 
+       paintTodayBtn( btnInfo);
+
+   }); 
+   // draw one more
+   const newBtnInfo = {
+       "className" : "item progress",
+       "id" : myRecodes.length,
+       "status": STATUS_PROGRESS,
+       "text" : myRecodes.length
+   }
+   paintTodayBtn(newBtnInfo);
+
+    const result = myRecodes.filter(item =>{item.status === STATUS_COMPLATE});
+    if (result.length === 0 && myRecodes.length > 28){ complateEffect(); return;}
+
+}
+
 
 const savedRecodes = localStorage.getItem(CHALLANGE_KEY);
 if(savedRecodes !== null){
     myRecodes = JSON.parse(savedRecodes);
 }
 
-function paintCheckBoard(){
-    let breakSignal = false;
-    const result = myRecodes.filter(item =>{item.status === STATUS_COMPLATE});
-   
-    for (const x of Array(30).keys()) {
-        const button = document.createElement("button");
-        const num = x+1;
-        const day_num = num;
-        button.id=day_num;
-        button.className="item";
-        const btnInfo = {
-            "id" : day_num,
-            "status": STATUS_PROGRESS,
-            "text" : day_num
-        } 
-        if(myRecodes.length !== 0) {
-            const found = myRecodes.find(element => element.id === day_num);
-    
-            if(found !== undefined){
-                btnInfo.text = found.text;
-                btnInfo.status = found.status;
-                paintTodayBtn(button, btnInfo);
-                button.addEventListener("click",completedToday);
-                checkBoard.appendChild(button);
-            } else {
-                paintTodayBtn(button, btnInfo);
-                button.addEventListener("click",completedToday);
-                checkBoard.appendChild(button);
-                breakSignal = true;
-
-            }
-        }
-        else {            
-            myRecodes.push(btnInfo);
-            paintTodayBtn(button, btnInfo);
-            button.addEventListener("click",completedToday);
-            checkBoard.appendChild(button);
-            breakSignal = true;
-        }
-        if (breakSignal) {
-            return
-        }
-    }
-    if (result.length === 0 && myRecodes.length > 28){ complateEffect(); return;}
-
-}
-paintCheckBoard();
-
 function resetChallange(event){
     
     if (confirm("모든 저장된 기록이 사라져요. 계속할까요?") == true) {
         localStorage.removeItem(CHALLANGE_KEY);
+        localStorage.removeItem(CHALLANGE_GOAL);
+        
         location.reload();
     } else {
         return;
     }
  
 }
+
 resetBtn.addEventListener("click",resetChallange);
+
+paintCheckBoard();
+
 
 const savedMyGoal = localStorage.getItem(CHALLANGE_GOAL);
 
 if (savedMyGoal !== null){
     printMyGoal(savedMyGoal);
-    printGuideText("you can do anything but you should do this.")
+    printGuideText("Check, everyday.")
 }

@@ -40,8 +40,10 @@ function paintTodo(newTodoObj){
 function deleteTodo(event){
     const li = event.target.parentElement;
     //delete from localstorage
+    console.log(li);
     const changedTodos = myDodos.filter((item) =>{ return item.id != li.id});
-    console.log(changedTodos);
+    console.log(changedTodos); 
+    myDodos = changedTodos;
     localStorage.setItem(TODOS_KEY,JSON.stringify(changedTodos));
     //delete from UL
     li.remove()
