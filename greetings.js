@@ -21,7 +21,7 @@ function handleLoginBtnClick(event){
 }
 
 function pantinGreetings(username){
-    greeting.innerText = `${username}, Let's do we wanted to do. `;
+    greeting.innerText = `Hello ${username}, Let's do we wanted to do. `;
     greeting.classList.remove(CLASSNAME_HIDDEN);
     
 }
